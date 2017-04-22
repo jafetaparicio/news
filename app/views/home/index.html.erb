@@ -1,0 +1,17 @@
+<% if user_signed_in? %>
+  <%= link_to 'New Story', new_story_path %>
+<% end %>
+
+<% @stories.each do |story| %>
+  <div class="media">
+    <div class="media-left">
+      <img class="media-object" src="...">
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading"><%= link_to story.title, story.url %></h4>
+      <% if story.user_id == current_user.id %>
+        <%= link_to 'Edit', edit_story_path(story) %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
