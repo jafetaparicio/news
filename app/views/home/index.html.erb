@@ -5,12 +5,22 @@
 <% @stories.each do |story| %>
   <div class="media">
     <div class="media-left">
-      <img class="media-object" src="...">
+      <%= image_tag story.image.url(:thumb), class: 'media-object' %>
     </div>
     <div class="media-body">
-      <h4 class="media-heading"><%= link_to story.title, story.url %></h4>
-      <% if story.user_id == current_user.id %>
+      <h4 class="media-heading">
+        <%= story.score %>
+        <%= link_to story.title, story.url %>
+        </h4>
+      <% if user_signed_in? && story.user_id == current_user.id %>
         <%= link_to 'Edit', edit_story_path(story) %>
+      <% end %>
+      <%= link_to  upvote_story_path(story) do %>
+        <i class='fa fa-arrow-up'></i>
+      <% end %>
+      |
+      <%= link_to downvote_story_path(story) do %>
+        <i class='fa fa-arrow-down'></i>
       <% end %>
     </div>
   </div>
